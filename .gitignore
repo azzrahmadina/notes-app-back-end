@@ -1,3 +1,4 @@
 node_modules
 notes-api-webserver.pem
 azzahra_credentials.csv
+eslint.config.mjs
