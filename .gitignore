@@ -3,3 +3,5 @@ notes-api-webserver.pem
 azzahra_credentials.csv
 eslint.config.mjs
 notes-backend.pem
+.env
+.prod.env
