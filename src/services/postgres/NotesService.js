@@ -25,7 +25,7 @@ class NotesService {
             values: [id, title, body, tags, createdAt, updatedAt, owner],
         };
 
-        const  result = await this._pool.query(query);
+        const result = await this._pool.query(query);
 
         if (!result.rows[0].id) {
             throw new InvariantError('Catatan gagal ditambahkan');
@@ -38,7 +38,7 @@ class NotesService {
         const query = {
             text: `SELECT notes.* FROM notes 
             LEFT JOIN collaborations ON collaborations.note_id = notes.id
-            WHERE notes.owner = $1 OR collaboration.user_id = $1
+            WHERE notes.owner = $1 OR collaborations.user_id = $1
             GROUP BY notes.id`,
             values: [owner],
         };
@@ -48,7 +48,10 @@ class NotesService {
 
     async getNoteById(id) {
         const query = {
-            text: 'SELECT * FROM notes WHERE id = $1',
+            text: `SELECT notes.*, users.username
+                    FROM notes
+                    LEFT JOIN users ON users.id = notes.owner
+                    WHERE notes.id = $1`,
             values: [id],
         };
         const result = await this._pool.query(query);
