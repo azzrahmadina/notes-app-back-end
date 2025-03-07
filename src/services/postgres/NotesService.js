@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable indent */
-/* eslint-disable no-useless-catch */
 
 const { nanoid } = require('nanoid');
 const { Pool } = require('pg');
